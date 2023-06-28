@@ -1,0 +1,25 @@
+extends ./layout/index
+
+block box
+  main.container.mt-5
+    .row
+      include ./layout/testimonials
+      .col-md-12
+        h2.text-center Add a Testimonial
+        if(errors) 
+          each error in errors
+            .alert.alert-danger.text-center=error.message
+    .row.justify-content-center
+      .col-md-8
+        form(action="/testimonials" method="post")
+          .form-group.p-2
+            label(for='name') Name
+            input#name.form-control(type='text' placeholder='Your Name' name="name", value=name)
+          .form-group.p-2
+            label(for='email') Email
+            input#email.form-control(type='email' placeholder='Your email' name="email", value=email)
+          .form-group.p-2
+            label(for='message') Message
+            textarea#message.form-control(name="message", rows=3, placeholder="Your Message", value=message)
+          .d-grid.gap-2
+            button.btn.btn-success.btn-block.mt-4(type="submit") Send
